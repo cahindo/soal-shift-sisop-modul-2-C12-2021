@@ -88,9 +88,6 @@ void main(){
           pidB = fork();
 
           if (pidB == 0) {
-            // char newLink[255];
-            // sprintf(newLink, "wget -qO %s %s", nmFile, linkDL);
-            // system(newLink);
             char *argv[] = {"wget", "-qO", nmFile, linkDL, NULL};
             execv("/bin/wget", argv);
             exit(0);
