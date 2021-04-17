@@ -54,6 +54,7 @@ void main(){
 
       pidA = fork();
       int stsA;
+      chdir("/home/boi");
 
       if (pidA < 0)
         exit(EXIT_FAILURE);
@@ -96,7 +97,57 @@ void main(){
           lop++;
           sleep(5);
         }
-        exit(0);
+        // ! SUBSOAL C
+        FILE *stsFile;
+        stsFile = fopen("status.txt", "w");
+
+        if(stsFile == NULL)
+          exit(EXIT_FAILURE);
+
+        char success[50] = "Download Success", temp;
+        // -- ALGORITMA CAESAR CIPER
+        for(int i = 0; success[i] != '\0'; ++i){
+          temp = success[i];
+          
+          if(temp >= 'a' && temp <= 'z'){
+            temp += 5;
+            if(temp > 'z'){
+              temp = temp - 'z' + 'a' - 1;
+            }
+            
+            success[i] = temp;
+          }
+          else if(temp >= 'A' && temp <= 'Z'){
+            temp += 5;
+            if(temp > 'Z'){
+              temp = temp - 'Z' + 'A' - 1;
+            }
+            
+            success[i] = temp;
+          }
+        }
+
+        fputs(success, stsFile);
+        fclose(stsFile);
+
+        chdir("/home/boi");
+        pid_t pidC;
+        pidC = fork();
+        int stsC;
+
+        if(pidC == 0){
+          char nmZip[300];
+          sprintf(nmZip, "%s.zip", nmFolder);
+          char *argv[] = {"zip", "-r", nmZip, nmFolder, NULL};
+          execv("/bin/zip", argv);
+        }else{
+          while(wait(&stsC) > 0);
+
+          char *argv[]={"rm", "-rf", nmFolder, NULL};
+          execv("/bin/rm", argv);
+        }
+
+        exit(EXIT_SUCCESS);
       }
     }
     sleep(40);
