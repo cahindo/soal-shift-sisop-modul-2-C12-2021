@@ -57,7 +57,7 @@ int main() {
   bool check = false;
 
   while (1) {
-	/*char waktu[100];
+	char waktu[100];
 	time_t now =time(0);
 	struct tm tstruct;
 	tstruct = *localtime(&now);
@@ -66,9 +66,7 @@ int main() {
 		check=false;
 		jalan();}
 	else if(strcmp("09-04__22-22", waktu) == 2)zip();
-    	*/
-	jalan();
-	zip();
+    
 	sleep(1);
   }
 }
