@@ -35,9 +35,9 @@ void main(){
   char nmFolder[200];
 
   while (1){
-    // pid_t pid3;
-    // pid3 = fork();
-    // if (pid3 == 0){
+    pid_t pid3;
+    pid3 = fork();
+    if (pid3 == 0){
       pid_t pidA;
 
       // ! SUBSOAL A
@@ -54,6 +54,7 @@ void main(){
 
       pidA = fork();
       int stsA;
+      chdir("/home/boi");
 
       if (pidA < 0)
         exit(EXIT_FAILURE);
@@ -148,8 +149,8 @@ void main(){
 
         exit(EXIT_SUCCESS);
       }
-      sleep(40);
-    // }
+    }
+    sleep(40);
   }
   exit(0);
 }
