@@ -119,7 +119,6 @@ void main(int argc, char *argv[])
           {
             int epoch = time(NULL);
             char linkDL[200];
-            // sprintf(linkDL, "https://picsum.photos/50");
             sprintf(linkDL, "%s/%d", "https://picsum.photos", (epoch % 1000) + 5);
 
             char nmFile[200];

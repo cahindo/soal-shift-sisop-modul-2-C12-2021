@@ -179,12 +179,60 @@ for (int i = 0; success[i] != '\0'; ++i)
 }
 ```
 
-### Sub Soal D
+### Sub Soal D dan E
 
-        // Print only the process IDs of syslogd:
-        // ps -C syslogd -o pid
-        // -r, --no-run-if-empty
-        // If the standard input does not  contain  any  non‐
-        // blanks,  do  not  run  the command.
+Pada soal ini diminta untukk membuat program killer yang akan mengehntikan proses daemon bedasar argumen yang dimasukkan. Untuk mengkill proses kami mencari proses menggunakan awk yang memiliki nama soal3 dan diambil id nya untuk di kill. Seluruh command yang diperlukan diletakan ke file Killer.sh dengan format bash. lalu file tersebut di beri akses agar bisa di execute dengan perintah chmod +x Killer.sh.
 
-### Sub Soal E
+```cpp
+if (strcmp(argv[1], "-z") == 0 || strcmp(argv[1], "-x") == 0)
+{
+  FILE *killerFile;
+  killerFile = fopen("Killer.sh", "w");
+
+  char bang[] = "#!/bin/bash";
+  char rmKiller[] = "rm -f Killer.sh";
+  char fullCommand[200];
+
+  char *execArg = &argv[0][2];
+  if (!strcmp(argv[1], "-z"))
+  {
+    sprintf(fullCommand, "ps -C %s -o pid= | xargs -r kill -9", execArg);
+  }
+  else if (!strcmp(argv[1], "-x"))
+  {
+    sprintf(fullCommand, "ps -C %s -o pid= -o stat= | awk '/Ss/ {print $1}' | xargs -r kill -9", execArg);
+  }
+
+  fputs(bang, killerFile);
+  fputs("\n", killerFile);
+  fputs(fullCommand, killerFile);
+  fputs("\n", killerFile);
+  fputs(rmKiller, killerFile);
+  fclose(killerFile);
+
+  char commandBash[50];
+  sprintf(commandBash, "chmod u+x %s", "Killer.sh");
+  FILE *runBash = popen(commandBash, "w");
+  pclose(runBash);
+}
+```
+
+### Screenshoot
+
+> Executing program
+
+<p align="center">
+  <img width="800" src="./soal3/execute.png">
+</p>
+
+> Proses download file gambar
+
+<p align="center">
+  <img width="800" src="./soal3/downloading.png">
+</p>
+
+> Hasil folder, zip folder, status.txt, dan file Killer.sh
+
+<p align="center">
+  <img width="800" src="./soal3/folder-zip-status.png">
+</p>
