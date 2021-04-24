@@ -14,6 +14,12 @@ Pada pengerjaan soal ini, kami sempat mengalami kendala karena command wget tida
 ### Sub Soal A
 
 ### Sub Soal B
+Pada sub soal B diminta untuk mengisi direktori yang sudah dibuat dengan 10 gambar yang didownload dari https://picsum.photos/, dimana setiap gambar akan didownload setiap 5 detik. Setiap gambar yang didownload akan diberi nama dengan format timestamp [YYYY-mm-dd_HH:ii:ss] dan gambar tersebut berbentuk persegi dengan ukuran (n%1000) + 50 pixel dimana n adalah detik Epoch Unix. Untuk itu dapat melanjutkan proses milik poin A, dengan else dan memanggil fungsi wait () untuk memasstikan pembuatan folder telah selesai
+'''cpp
+'''
+jika pembuatan direktori telah selesai, pindah ke direktori tersebut dengan fungsi chdir(). Jika telah masuk ke direktori tersebut lakukan perulangan sebanyak 10 kali yang setiap iterasinya  download file dengan 
+
+
 ### Sub Soal C
 ### Sub Soal D
 ### Sub Soal E
