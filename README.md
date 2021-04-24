@@ -36,28 +36,29 @@ while (1)
 Program soal A ini secara keseluruhan berada dalam while daemon seperti kode diatas.
 
 ```cpp
-  time_t ta = time(NULL);
-  struct tm tms = *localtime(&ta);
-  sprintf(nmFolder,
-          "%02d-%02d-%d_%02d:%02d:%02d",
-          tms.tm_mday,
-          tms.tm_mon + 1,
-          tms.tm_year + 1900,
-          tms.tm_hour,
-          tms.tm_min,
-          tms.tm_sec);
-  pid_t pidA;
-  pidA = fork();
-  int stsA;
-  chdir("/home/boi");
+time_t ta = time(NULL);
+struct tm tms = *localtime(&ta);
+sprintf(nmFolder,
+        "%02d-%02d-%d_%02d:%02d:%02d",
+        tms.tm_mday,
+        tms.tm_mon + 1,
+        tms.tm_year + 1900,
+        tms.tm_hour,
+        tms.tm_min,
+        tms.tm_sec);
 
-  if (pidA < 0)
-    exit(EXIT_FAILURE);
-  if (pidA == 0)
-  {
-    char *argv[] = {"mkdir", nmFolder, NULL};
-    execv("/bin/mkdir", argv);
-  }
+pid_t pidA;
+pidA = fork();
+int stsA;
+chdir("/home/boi");
+
+if (pidA < 0)
+  exit(EXIT_FAILURE);
+if (pidA == 0)
+{
+  char *argv[] = {"mkdir", nmFolder, NULL};
+  execv("/bin/mkdir", argv);
+}
 ```
 
 Program diatas merupakan child proses untuk membuat folder dengan nama direktori dari string yang digenerate dari waktu saat ini.
@@ -76,10 +77,12 @@ chdir(curFolder);
 Jika pembuatan direktori telah selesai, pindah ke direktori tersebut dengan fungsi chdir(), jika telah masuk ke direktori tersebut,lakukan perulangan sebanyak 10 kali yang setiap iterasinya melakukan hal berikut. Pertama persiapkan variabel untuk memberi nama file dengan cara yang sama dengan sub soal A. Lalu download file dengan command wget dengan perintah fork() dan exec() dan beri nama file dengan variabel yang telah dibuat sebelumnya. Setelah proses download dilakukan, tunggu selama 5 detik dengan fungsi sleep(5)
 
 ```cpp
-while (lop < 10) {
+while (lop < 10)
+{
   int epoch = time(NULL);
   char linkDL[200];
-  sprintf(linkDL, "https://picsum.photos/50");
+  // sprintf(linkDL, "https://picsum.photos/50");
+  sprintf(linkDL, "%s/%d", "https://picsum.photos", (epoch % 1000) + 5);
 
   char nmFile[200];
   time_t tb = time(NULL);
@@ -95,7 +98,8 @@ while (lop < 10) {
   pid_t pidB;
   pidB = fork();
 
-  if (pidB == 0) {
+  if (pidB == 0)
+  {
     char *argv[] = {"wget", "-qO", nmFile, linkDL, NULL};
     execv("/bin/wget", argv);
     exit(0);
@@ -107,6 +111,73 @@ while (lop < 10) {
 ```
 
 ### Sub Soal C
+
+Pada soal C ini diminta untuk membuat file `status.txt` dengan isi "Download Success" yang dienskripsi dengan teknik caesar ciper shift 5. Setelah proses soal B selesai, file status.txt dimasukan kedalam direktori tersebut dan direktori tersebut di Zip. selanjutnya program akan menunggu proses zip selesai dengan fork() proses baru dan memanggil zip dengan exec. Setelah itu program menjalankan perintah untuk menghapus direktori yang baru saja di Zip dengan fork() dengan mamanggil rm -rf dengan exec.
+
+```cpp
+FILE *stsFile;
+stsFile = fopen("status.txt", "w");
+
+if (stsFile == NULL)
+  exit(EXIT_FAILURE);
+
+char success[50] = "Download Success", temp;
+
+// -- ALGORITMA CAESAR CIPER ...
+
+fputs(success, stsFile);
+fclose(stsFile);
+
+chdir("/home/boi");
+pid_t pidC;
+pidC = fork();
+int stsC;
+
+if (pidC == 0)
+{
+  char nmZip[300];
+  sprintf(nmZip, "%s.zip", nmFolder);
+  char *argv[] = {"zip", "-r", nmZip, nmFolder, NULL};
+  execv("/bin/zip", argv);
+}
+else
+{
+  while (wait(&stsC) > 0);
+
+  char *argv[] = {"rm", "-rf", nmFolder, NULL};
+  execv("/bin/rm", argv);
+}
+```
+
+Untuk algoritma caesar ciper dengan shift 5 sendiri dapat dilihat pada kode berikut.
+
+```cpp
+for (int i = 0; success[i] != '\0'; ++i)
+{
+  temp = success[i];
+
+  if (temp >= 'a' && temp <= 'z')
+  {
+    temp += 5;
+    if (temp > 'z')
+    {
+      temp = temp - 'z' + 'a' - 1;
+    }
+
+    success[i] = temp;
+  }
+  else if (temp >= 'A' && temp <= 'Z')
+  {
+    temp += 5;
+    if (temp > 'Z')
+    {
+      temp = temp - 'Z' + 'A' - 1;
+    }
+
+    success[i] = temp;
+  }
+}
+```
 
 ### Sub Soal D
 
