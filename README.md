@@ -17,7 +17,7 @@ Pada soal ini, diberikan sebuah file berekstensi zip. Lalu kita diminta untuk me
 
 Pada sub-soal 2A, kita diminta untuk melakukan unzip dan menghapus folder(yang tidak penting)
 
-```
+```cpp
 int unzipper () {
   pid_t child_id;
     int status;
@@ -39,7 +39,7 @@ int unzipper () {
 }
 ```
 
-```
+```cpp
 void remDir (char *NF) {
 
     pid_t child_id;
@@ -64,7 +64,7 @@ void remDir (char *NF) {
 
 Pada sub soal ini, kita akan membuat folder sesuai dengan jenis daripada gambar hewan peliharaan tersebut.
 
-```
+```cpp
 void createDir(char *NF) {
     char temp[150]; 
     char *token1, *token2;
@@ -105,7 +105,7 @@ void createDir(char *NF) {
 
 Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jenis;nama;umur.jpg` menjadi hanya `nama.jpg`. Akan tetapi, file yang mengandung 2 jenis nama, akan dipisahkan dan dimasukkan ke masing-masing folder.
 
-```
+```cpp
         sprintf(befName, "%s/%s", to, temp);
         sprintf(afName, "%s/%s.jpg", petName, token2);
 
@@ -124,7 +124,7 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
 
 Pada sub soal E, kita diminta membuat suatu apendix bernama keterangan.txt yang berisikan nama dan umur hewan peliharaan.
 
-```
+```cpp
 void keterangan (char *dp, char *age, char *finName) {
     char detil[150];
     char print[200];
