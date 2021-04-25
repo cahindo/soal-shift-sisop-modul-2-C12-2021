@@ -121,16 +121,16 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
 ```
 
 <p align="center">
-	<img src="screenshot/soal2/2a.png" width="500">
+	<img src="screenshot/soal2/2a.png" width="700">
 	<br>
 	Hasil direktori petshop yang telah diisi folder pets
 	<br>
 </p>
 
-<br><br><br>
+<br><br>
 
 <p align="center">
-	<img src="screenshot/soal2/2b.png" width="500">
+	<img src="screenshot/soal2/2b.png" width="700">
 	<br>
 	Hasil salah satu direktori pets (cat)
 	<br>
@@ -154,6 +154,15 @@ void keterangan (char *dp, char *age, char *finName) {
     fclose(fptrout);
 }
 ```
+
+<p align="center">
+	<img src="screenshot/soal2/2c.png" width="700">
+	<br>
+	isi keterangan.txt
+	<br>
+</p>
+
+<br><br>
 
 ## SOAL 3
 
