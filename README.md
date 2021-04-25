@@ -17,6 +17,7 @@ Pada soal ini, diberikan sebuah file berekstensi zip. Lalu kita diminta untuk me
 
 Pada sub-soal 2A, kita diminta untuk melakukan unzip dan menghapus folder(yang tidak penting)
 
+
 ```cpp
 int unzipper () {
   pid_t child_id;
@@ -25,7 +26,7 @@ int unzipper () {
   child_id = fork();
 
    if (child_id < 0) {
-   exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+   exit(EXIT_FAILURE);
    }
 
   if (child_id == 0) {
@@ -38,6 +39,32 @@ int unzipper () {
 
 }
 ```
+
+Fungsi `unzipper()` berfugsi untuk mengunzip `pets.zip`.
+
+```cpp
+void checker() {
+    char src[1000];
+    struct dirent *ep;
+    DIR *dp = opendir(to);
+    if (!dp) return;
+
+//  ep = readdir(dp);
+
+    while ((ep = readdir(dp)) != NULL) {
+        if (!strcmp(ep->d_name, ".") == 0 && !strcmp(ep->d_name, "..") == 0) { // menghindari file . atau .. sehingga hanya jpg yang diambil
+            char NF[50];
+            strcpy(NF, ep->d_name);
+
+            createDir(NF);
+            remDir(ep->d_name);
+        }
+    }
+}
+```
+
+Fungsi checker berfungsi untuk mengecek apakah file yang ada di pets.zip merupakan `.` atau `..`. Apabila file tersebut merupakan folder atau direktori, maka akan dimasukkan ke variabel `(ep->d_name)` yang kemudian akan masuk ke fungsi `remDir()` untuk dihapus. Sisanya akan dimasukkan ke variabel `NF` yang nantinya akan dimasukkan  ke fungsi `createDir()` untuk dibuatkan folder sesuai jenis hewan peliharaan tersebut.
+
 
 ```cpp
 void remDir (char *NF) {
@@ -58,6 +85,8 @@ void remDir (char *NF) {
 }
 
 ```
+
+
 
 ### Sub Soal B
 #### mkdir
@@ -99,6 +128,8 @@ void createDir(char *NF) {
         	}
 	}
 ```
+
+Pada fungsi `createDir()` di atas, terdapat fungsi `strtok_r` untuk memisahkan antar pets yang dipisahkan dengan `_` dan memisahkan antar jenis, nama, dan umur yang dipisahkan dengan `;`. Pada `token2` yang pertama, diambil jenis daripada hewan peliharaan tersebut. `token2` tersebut yang nantinya akan dijadikan nama dari folder hewan peliharaan tersebut.
 
 ### Sub soal C & D
 #### cp
@@ -158,7 +189,7 @@ void keterangan (char *dp, char *age, char *finName) {
 <p align="center">
 	<img src="screenshot/soal2/2c.png" width="700">
 	<br>
-	isi keterangan.txt
+	isi keterangan.txt pada folder cat
 	<br>
 </p>
 
