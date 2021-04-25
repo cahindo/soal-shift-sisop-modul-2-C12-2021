@@ -369,7 +369,7 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
 <br><br>
 
 <p align="center">
-	<img src=screenshot/soal2/2b.png" width="700">
+	<img src="screenshot/soal2/2b.png" width="700">
 	<br>
 	Hasil salah satu direktori pets (cat)
 	<br>
