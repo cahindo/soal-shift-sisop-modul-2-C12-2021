@@ -360,7 +360,7 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
 ```
 
 <p align="center">
-	<img src="screenshot/soal2/2a.png" width="700">
+	<img src="soal-shift-sisop-modul-2-C12-2021/screenshot/soal2/2a.png" width="700">
 	<br>
 	Hasil direktori petshop yang telah diisi folder pets
 	<br>
@@ -369,7 +369,7 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
 <br><br>
 
 <p align="center">
-	<img src="screenshot/soal2/2b.png" width="700">
+	<img src="soal-shift-sisop-modul-2-C12-2021/screenshot/soal2/2b.png" width="700">
 	<br>
 	Hasil salah satu direktori pets (cat)
 	<br>
@@ -395,7 +395,7 @@ void keterangan (char *dp, char *age, char *finName) {
 ```
 
 <p align="center">
-	<img src="screenshot/soal2/2c.png" width="700">
+	<img src="soal-shift-sisop-modul-2-C12-2021/screenshot/soal2/2c.png" width="700">
 	<br>
 	isi keterangan.txt pada folder cat
 	<br>
