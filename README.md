@@ -29,11 +29,7 @@ int unzipper () {
    }
 
   if (child_id == 0) {
-    // this is child
 
-
-//    char *argv[] = {"mkdir", to, NULL};
-//    execv("/bin/mkdir", argv);
     	char *argv[] = {"unzip", from , "-x", "*/*", "-d", to, NULL};
     	execv("/usr/bin/unzip", argv);
 	exit(EXIT_SUCCESS);
@@ -43,7 +39,7 @@ int unzipper () {
 }
 ```
 
-`
+```
 void remDir (char *NF) {
 
     pid_t child_id;
@@ -61,14 +57,14 @@ void remDir (char *NF) {
         (wait(&status) > 0);
 }
 
-`
+```
 
 ### Sub Soal B
 #### mkdir
 
 Pada sub soal ini, kita akan membuat folder sesuai dengan jenis daripada gambar hewan peliharaan tersebut.
 
-``
+```
 void createDir(char *NF) {
     char temp[150]; 
     char *token1, *token2;
@@ -102,14 +98,14 @@ void createDir(char *NF) {
         ((wait(&status)) > 0);
         	}
 	}
-``
+```
 
 ### Sub soal C & D
 #### cp
 
 Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jenis;nama;umur.jpg` menjadi hanya `nama.jpg`. Akan tetapi, file yang mengandung 2 jenis nama, akan dipisahkan dan dimasukkan ke masing-masing folder.
 
-``
+```
         sprintf(befName, "%s/%s", to, temp);
         sprintf(afName, "%s/%s.jpg", petName, token2);
 
@@ -122,13 +118,13 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
           execv("/bin/cp", argv2);
         else
         ((wait(&status)) > 0);
-``
+```
 
 ### Sub soal E
 
 Pada sub soal E, kita diminta membuat suatu apendix bernama keterangan.txt yang berisikan nama dan umur hewan peliharaan.
 
-``
+```
 void keterangan (char *dp, char *age, char *finName) {
     char detil[150];
     char print[200];
@@ -139,7 +135,7 @@ void keterangan (char *dp, char *age, char *finName) {
     fputs(detil, fptrout);
     fclose(fptrout);
 }
-``
+```
 
 ## SOAL 3
 
