@@ -202,7 +202,14 @@ void zip(){
 Kendala yang dialami pada saat mendownload filenya mengalami corrupt sehingga tidak dapat diekstrak. Solusi yang digunakan adalah menambahkan waktu sleep diantara proses download dan ekstrak.
 
 ### Hasil
-
+> Hasil ketika tanggal 9 April pukul 16:22
+<p align="center">
+  <img width="800" src="./screenshot/soal1/Output1.png">
+</p>
+> Hasil ketika tanggal 9 April pukul 22:22
+<p align="center">
+  <img width="800" src="./screenshot/soal1/output2.png">
+</p>
 
 
 ## SOAL 2
