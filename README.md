@@ -127,6 +127,17 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
 	<br>
 </p>
 
+<br><br><br>
+
+<p align="center">
+	<img src="screenshot/soal2/2b.png" width="500">
+	<br>
+	Hasil salah satu direktori pets (cat)
+	<br>
+</p>
+<br>
+
+
 ### Sub soal E
 
 Pada sub soal E, kita diminta membuat suatu apendix bernama keterangan.txt yang berisikan nama dan umur hewan peliharaan.
