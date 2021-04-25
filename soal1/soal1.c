@@ -16,6 +16,8 @@ void Pindah(char *base, char *tujuan);
 void Pindah2(char *file, char *folder);
 void makeDir();
 void jalan();
+void apusfolder(char* base);
+void apusfolder2(char* tujuan);
 void zip();
 void foto();
 void musik();
@@ -62,10 +64,10 @@ int main() {
 	struct tm tstruct;
 	tstruct = *localtime(&now);
 	strftime(waktu, sizeof(waktu), "%d-%m__%H-%M", &tstruct);
-	if(strcmp("09-04__16-22",waktu) == 0 && !check){
-		check=false;
-		jalan();}
-	else if(strcmp("09-04__22-22", waktu) == 2)zip();
+	if(strcmp("09-04__16-22",waktu) == 0){
+		jalan();
+		apusfolder("/home/abit/Desktop/Modul2/Praktikum");}
+	else if(strcmp("09-04__22-22", waktu) == 0)zip();
     
 	sleep(1);
   }
@@ -82,11 +84,11 @@ void musik(){
 	child_2 = fork();
 	if(child_2 < 0) exit(EXIT_FAILURE);
 	if(child_2 == 0){
-		char *argument[] = {"wget", "-bq", "--no-check-certificate", "https://drive.google.com/file/d/1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J/view", "-O", "Musik_for_Stevany.zip", NULL};
+		char *argument[] = {"wget", "-bq","--no-check-certificate", "https://drive.google.com/uc?id=1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J&export=download", "-O", "Musik_for_Stevany.zip", NULL};
 		execv("/bin/wget", argument);}
 	else{
 		while((wait(&flag2))>0);
-		sleep(10);
+		sleep(30);
 		char *argument2[] = {"unzip", "/home/abit/Desktop/Modul2/Praktikum/Musik_for_Stevany.zip", NULL};
  		execv("/bin/unzip",argument2);}
  }
@@ -106,11 +108,11 @@ void film(){
 	child_2 = fork();
 	if(child_2 < 0) exit(EXIT_FAILURE);
 	if(child_2 == 0){
-		char *argument[] = {"wget", "-bq", "--no-check-certificate", "https://drive.google.com/file/d/1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp/view", "-O", "Film_for_Stevany.zip", NULL};
+		char *argument[] = {"wget", "-bq", "--no-check-certificate", "https://drive.google.com/uc?id=1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp&export=download", "-O", "Film_for_Stevany.zip", NULL};
 		execv("/bin/wget", argument);}
 	else{
 		while((wait(&flag2))>0);
-		sleep(10);
+		sleep(30);
 		char *argument2[] = {"unzip", "/home/abit/Desktop/Modul2/Praktikum/Film_for_Stevany.zip", NULL};
  		execv("/bin/unzip",argument2);}
  }
@@ -131,11 +133,11 @@ void foto(){
 	child_2 = fork();
 	if(child_2 < 0) exit(EXIT_FAILURE);
 	if(child_2 == 0){
-		char *argument[] = {"wget", "-bq", "--no-check-certificate", "https://drive.google.com/file/d/1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD/view", "-O", "Foto_for_Stevany.zip", NULL};
+		char *argument[] = {"wget", "-bq", "--no-check-certificate", "https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download", "-O", "Foto_for_Stevany.zip", NULL};
 		execv("/bin/wget", argument);}
 	else{
 		while((wait(&flag2))>0);
-		sleep(10);
+		sleep(30);
 		char *argument2[] = {"unzip", "/home/abit/Desktop/Modul2/Praktikum/Foto_for_Stevany.zip", NULL};
  		execv("/bin/unzip",argument2);}
  }
@@ -228,6 +230,37 @@ void jalan(){
 }
 
 void zip(){
- char *arg[]={"zip","-mr","Lopyu_Stevany.zip","Pyoto","Fylm","Musyik","FOTO","FILM","MUSIK",NULL};
+ char *arg[]={"zip","-mr","Lopyu_Stevany.zip","Pyoto","Fylm","Musyik",NULL};
  execv("/bin/zip",arg);
+}
+
+void apusfolder(char* base){
+	char path[1000];
+	struct dirent *dp;
+	DIR *dir = opendir(base);
+	
+	if(!dir) return;
+	while((dp=readdir(dir)) != NULL){
+		if(strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") !=0){
+			strcpy(path, base);
+			strcat(path, "/");
+			strcat(path, dp->d_name);
+			if(strcmp(dp->d_name, "FILM") == 0 || strcmp(dp->d_name, "FOTO") == 0 || strcmp(dp->d_name, "MUSIK") == 0){
+			apusfolder2(path);}
+		}
+	}
+}
+
+void apusfolder2(char* tujuan){
+	pid_t child;
+	child = fork();
+	int flag;
+	if(child < 0)exit(EXIT_FAILURE);
+	if(child == 0){
+		char *arg[]={"rm", "-rf", tujuan, NULL};
+		execv("/bin/rm",arg);
+	}
+	else{
+		while((wait(&flag)) > 0);
+	}
 }
