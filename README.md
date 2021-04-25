@@ -120,6 +120,13 @@ Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jen
         ((wait(&status)) > 0);
 ```
 
+<p align="center">
+	<img src="screenshot/soal2/2a.png" width="500">
+	<br>
+	Hasil direktori petshop yang telah diisi folder pets
+	<br>
+</p>
+
 ### Sub soal E
 
 Pada sub soal E, kita diminta membuat suatu apendix bernama keterangan.txt yang berisikan nama dan umur hewan peliharaan.
