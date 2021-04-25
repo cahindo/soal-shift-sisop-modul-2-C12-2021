@@ -403,6 +403,10 @@ void keterangan (char *dp, char *age, char *finName) {
 
 <br><br>
 
+
+### Kendala yang dihadapi
+Pada pengerjaan soal ini, terdapat kendala mengenai cara mengidentifikasi folder dan file, juga cara menggunakan fptrout. Akan tetapi, setelah beberapa pencarian di internet, kendala tersebut apat diatasi dan program bisa berjalan dengan semestinya.
+
 ## SOAL 3
 
 Pada soal ini kita diminta membuat program yang berupa daemon proses yang akan mendownload file dari link tertentu berdasarkan waktu proses tersebut berjalan.
