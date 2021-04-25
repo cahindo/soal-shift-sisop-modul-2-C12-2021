@@ -10,6 +10,137 @@
 
 ## SOAL 2
 
+Pada soal ini, diberikan sebuah file berekstensi zip. Lalu kita diminta untuk membuat sebuah program yang dapat melakukan unzip, pemisahan file dan folder, dan penghapusan folder(yang tidak berguna). Setelah itu kita akan mendapatkan file `.jpg` dengan format nama file `jenis;nama;umur.jpg`. Lantas tugas kita yakni mengategorikan setiap file tersebut, memasukkannya ke folder yang sesuai dengan jenisnya, dan menambahkan apendix `keterangan.txt` yang berisikan data nama dan umur dari tiap hewan dalam satu folder.
+
+### Sub Soal A 
+#### Unzip dan Remove
+
+Pada sub-soal 2A, kita diminta untuk melakukan unzip dan menghapus folder(yang tidak penting)
+
+```
+int unzipper () {
+  pid_t child_id;
+    int status;
+
+  child_id = fork();
+
+   if (child_id < 0) {
+   exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+   }
+
+  if (child_id == 0) {
+    // this is child
+
+
+//    char *argv[] = {"mkdir", to, NULL};
+//    execv("/bin/mkdir", argv);
+    	char *argv[] = {"unzip", from , "-x", "*/*", "-d", to, NULL};
+    	execv("/usr/bin/unzip", argv);
+	exit(EXIT_SUCCESS);
+	}
+    while ((wait(&status)) > 0);
+
+}
+```
+
+`
+void remDir (char *NF) {
+
+    pid_t child_id;
+
+    int status;
+    char source[150];
+    sprintf(source, "%s/%s", to, NF);
+
+    char *argv[] = {"rm", "-f", source, NULL};
+
+    child_id = fork();
+    if (child_id == 0)
+        execv("/bin/rm", argv);
+    else //parent
+        (wait(&status) > 0);
+}
+
+`
+
+### Sub Soal B
+#### mkdir
+
+Pada sub soal ini, kita akan membuat folder sesuai dengan jenis daripada gambar hewan peliharaan tersebut.
+
+``
+void createDir(char *NF) {
+    char temp[150]; 
+    char *token1, *token2;
+    char *ptrtok1, *ptrtok2;
+    char *strptr = NF;
+
+    strcpy(temp, NF);
+
+
+    while (1) {
+        char petName[100];
+        char afName[150];
+	char befName[150];
+
+        token1 = strtok_r(strptr, "_", &ptrtok1);
+        if (!token1) break;
+
+        token2 = strtok_r(token1, ";", &ptrtok2);
+        if (!token2) break;
+
+        sprintf(petName, "%s/%s", to, token2);
+        char *argv1[] = {"mkdir", "-p", petName, NULL};
+
+
+    	pid_t child_id2;
+   	int status;
+    	child_id2 = fork();
+    	if (child_id2 == 0)
+          execv("/bin/mkdir", argv1);
+        else
+        ((wait(&status)) > 0);
+        	}
+	}
+``
+
+### Sub soal C & D
+#### cp
+
+Pada sub soal C & D, kita diminta untuk mengganti nama file yang sebelumnya `jenis;nama;umur.jpg` menjadi hanya `nama.jpg`. Akan tetapi, file yang mengandung 2 jenis nama, akan dipisahkan dan dimasukkan ke masing-masing folder.
+
+``
+        sprintf(befName, "%s/%s", to, temp);
+        sprintf(afName, "%s/%s.jpg", petName, token2);
+
+        char *argv2[] = {"cp", befName, afName, NULL};
+
+
+    	pid_t child_id1;
+    	child_id1 = fork();
+    	if (child_id1 == 0)
+          execv("/bin/cp", argv2);
+        else
+        ((wait(&status)) > 0);
+``
+
+### Sub soal E
+
+Pada sub soal E, kita diminta membuat suatu apendix bernama keterangan.txt yang berisikan nama dan umur hewan peliharaan.
+
+``
+void keterangan (char *dp, char *age, char *finName) {
+    char detil[150];
+    char print[200];
+
+    sprintf(detil, "name\t: %s\numur\t: %s\n\n", finName, age);
+    sprintf(print, "%s/keterangan.txt", dp);
+    FILE *fptrout = fopen(print, "a");
+    fputs(detil, fptrout);
+    fclose(fptrout);
+}
+``
+
 ## SOAL 3
 
 Pada soal ini kita diminta membuat program yang berupa daemon proses yang akan mendownload file dari link tertentu berdasarkan waktu proses tersebut berjalan.
